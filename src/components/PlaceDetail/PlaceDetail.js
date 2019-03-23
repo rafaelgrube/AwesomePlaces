@@ -4,22 +4,23 @@ import { Modal, View, Image, Text, Button, StyleSheet } from 'react-native';
 const placeDetail = props => {
   let modalContent = null;
 
-  if (props.selectedPlace) {
+  if (props.selectedPlace !== null) {
     modalContent = (
       <View>
-        <Image source={props.selectedPlace.image} style={styles.placeImage} />
+        <Image style={styles.placeImage} source={props.selectedPlace.image} />
         <Text style={styles.placeName}>{props.selectedPlace.name}</Text>
       </View>
     );
   }
+
   return (
     <Modal
       onRequestClosed={props.onModalClosed}
       visible={props.selectedPlace !== null}
       animationType="slide"
     >
+      {modalContent}
       <View style={styles.modalContainer}>
-        {modalContent}
         <View>
           <Button title="Delete" color="red" onPress={props.onItemDeleted} />
           <Button title="Close" onPress={props.onModalClosed} />
@@ -31,7 +32,7 @@ const placeDetail = props => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    marginTop: 0,
+    marginTop: 80,
   },
 
   placeImage: {
